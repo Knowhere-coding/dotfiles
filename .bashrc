@@ -205,16 +205,78 @@ alias lsd='ls -p | grep / --color=none'                     # show only director
 alias lsfc='echo "$(ls -p | grep -v / | wc -l) files"'      # show the number of files
 alias lsdc='echo "$(ls -p | grep / | wc -l) directories"'   # show the number of directories
 
-alias lfx='find . -maxdepth 1 -type f -exec ls -lh {} + | grep "./\w" --color=none | sed -E "s#\./##"; lsd' # long format for files short for directories
-alias ldx='ll -d */; lsf'                                                                                   # long format for directories short for files   
+alias lfx='find . -maxdepth 1 -type f -exec ls -lh {} +\
+            | grep "./\w" --color=none \
+            | sed -E "s#\./##"; lsd'                        # long format for files short for directories
+
+alias ldx='ll -d */; lsf'                                   # long format for directories short for files   
 
 alias ltla='ls -Alth'                                       # list all files sorted by their last modification time, including hidden files
 alias lsl='du -hsx * | sort -rh | head -10'                 # list the top 10 largest files or directories in the current directory
 
+# git --------------------------------------------------------------------------------------
+alias gs='git status'                                       # git status
+alias ga='git add'                                          # git add
+alias gc='git commit'                                       # git commit
+alias gcm='git commit -m'                                   # git commit -m
+alias gd='git diff'                                         # git diff
+alias gl='git log'                                          # git log
+alias gco='git checkout'                                    # git checkout
+alias gb='git branch'                                       # git branch
+alias gbd='git branch -d'                                   # git branch -d
+alias gba='git branch -a'                                   # git branch -a
+alias gp='git pull'                                         # git pull
+alias gps='git push'                                        # git push
+alias gph='git push origin HEAD'                            # git push origin HEAD
+alias gr='git remote -v'                                    # git remote -v
+alias grm='git remote -v prune origin'                      # git remote -v prune origin
+alias gri='git rebase -i'                                   # git rebase -i
+alias gss='git stash save'                                  # git stash save
+alias gsl='git stash list'                                  # git stash list
+alias gsp='git stash pop'                                   # git stash pop
+alias gssu='git stash save --include-untracked'             # git stash save --include-untracked
+alias gst='git stash'                                       # git stash
+alias gm='git merge'                                        # git merge
+alias gaa='git add --all'                                   # git add --all
+alias gcl='git clone'                                       # git clone
+alias gcp='git cherry-pick'                                 # git cherry-pick
+alias grs='git reset'                                       # git reset
+alias gpf='git push --force'                                # git push --force
+alias gg='git grep'                                         # git grep
+alias gpf!='git push --force-with-lease'                    # git push --force-with-lease
+
+alias gbs="git branch --sort=-committerdate --format=\
+'%(color:yellow)%(refname:short)%(color:reset) - \
+%(color:blue)%(objectname:short)%(color:reset) - \
+%(color:red)%(committerdate:relative)%(color:reset)'"       # Show a compact git branch summary
+
+alias glog="git log --graph --oneline --decorate --all"     # Show a colored and graphical git log
+alias gloga="git log --pretty=format:'%h %s (%an <%ae>)'"   # Show a pretty Git log with author details
+
+alias gtb="git for-each-ref --format='%(refname:short) \
+<- %(upstream:short)' refs/heads/*"                         # Show the current branch's tracking branch
+
+alias gcount="git shortlog -s -n"                           # Show the number of commits each contributor has made
+alias grias="git rebase -i --autosquash"                    # Interactive rebase with autosquash
+alias gignored="git ls-files --others --exclude-standard"   # Show the list of ignored files
+alias gssb="git status -sb"                                 # Show the Git status with short and branch-specific info
+
+alias gdm="git branch --merged \
+            | grep -v '*' \
+            | xargs -I % git branch -d %"                   # Delete all merged branches (use with caution)
+
+alias gbdboth="git branch -d \$1 && \
+               git push origin --delete \$1"                # Delete a branch both locally and remotely
+
+# system -----------------------------------------------------------------------------------
+alias sai='sudo apt install'                                # install package
+alias sar='sudo apt remove'                                 # remove package
+alias update='sudo apt update'                              # update system
+alias upgrade='sudo apt upgrade'                            # upgrade system
+
 # other ------------------------------------------------------------------------------------
 alias wttr='curl "wttr.in"'                                 # weather info
 alias ch='history -c && history -w && exit'                 # clear history and exit
-alias sai='sudo apt install'                                # install package
 alias ip='curl -s ifconfig.me'                              # show public ip address
 
 #######################################################
